@@ -1,3 +1,4 @@
+const parent = document.getElementById("parent");
 //library of books
 let library = [];
 
@@ -10,12 +11,17 @@ function book(author, title, pages, read) {
   library.push(this);
 }
 
-//loops through library array
+//loops through library array and displays it
 function loopBooks() {
-  library.forEach((element) => console.log(element));
+  library.forEach((element) => {
+    let $div = document.createElement("div");
+    let book = element;
+    $div.append(book);
+    parent.append($div);
+  });
 }
-//set loopsBooks prototype to a copy of makeBook
-//(lets makeBook have access to loopBooks function)
+//set loopsBooks prototype to a copy of book
+//(lets Book have access to loopBooks function)
 loopBooks.prototype = Object.create(book.prototype);
 
 const bookOne = new book("james", "dont run", "356", "read");
@@ -23,7 +29,7 @@ const bookTwo = new book("Emmanuel", "Dune", "600", "read");
 
 loopBooks();
 
-const displayBook = document.querySelector(".display-book1");
-
-/*displayBook.inner*/
-//get div inner text and loop it to display all books on screen */
+/*
+tat least we got somewhere 
+i guess convert them to strings 
+and they should print out fine */
