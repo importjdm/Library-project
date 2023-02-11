@@ -4,10 +4,10 @@ let library = [];
 
 //constructor
 function book(author, title, pages, read) {
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.read = read;
+  this.Author = author;
+  this.Title = title;
+  this.Pages = pages;
+  this.Read = read;
   library.push(this);
 }
 
@@ -15,9 +15,12 @@ function book(author, title, pages, read) {
 function loopBooks() {
   library.forEach((element) => {
     let $div = document.createElement("div");
-    let book = element;
-    $div.append(book);
-    parent.append($div);
+    $div.className = "book";
+    let string = Object.entries(element)
+      .map((x) => x.join(": "))
+      .join("\n");
+    $div.append(string);
+    parent.appendChild($div);
   });
 }
 //set loopsBooks prototype to a copy of book
@@ -30,6 +33,4 @@ const bookTwo = new book("Emmanuel", "Dune", "600", "read");
 loopBooks();
 
 /*
-tat least we got somewhere 
-i guess convert them to strings 
-and they should print out fine */
+make a grid or card to display the info creativly */
