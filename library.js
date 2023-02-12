@@ -1,4 +1,5 @@
-const parent = document.getElementById("parent");
+const parent = document.querySelector(".bookContainer");
+let i = 0;
 //library of books
 let library = [];
 
@@ -14,13 +15,14 @@ function book(author, title, pages, read) {
 //loops through library array and displays it
 function loopBooks() {
   library.forEach((element) => {
+    i += 1;
     let $div = document.createElement("div");
-    $div.className = "book";
+    $div.classList.add("book", "book" + i);
     let string = Object.entries(element)
       .map((x) => x.join(": "))
       .join("\n");
     $div.append(string);
-    parent.appendChild($div);
+    parent.append($div);
   });
 }
 //set loopsBooks prototype to a copy of book

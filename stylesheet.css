@@ -2,14 +2,26 @@ body {
   height: 100vh;
   margin: 0px;
 }
+/*container of everything*/
 #parent {
   height: 100vh;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+.left-side {
+  grid-column: 1;
+  grid-row: 1;
 }
 
+/*containers the books */
+.bookContainer {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fill, minmax(60px, 1fr));
+}
+/*setting for all the books*/
 .book {
   font-family: "kanit", sans-serif;
-  font-size: 40px;
+  font-size: 2vw;
 }
