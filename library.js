@@ -35,4 +35,7 @@ const bookTwo = new book("Emmanuel", "Dune", "600", "read");
 loopBooks();
 
 /*
-make a grid or card to display the info creativly */
+clean up the form
+figure out how to make it disapear
+figure how to make it appear when your press the button
+ */

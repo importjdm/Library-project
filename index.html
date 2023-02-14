@@ -19,7 +19,7 @@
       <div class="bookContainer"></div>
       <div class="left-side">
         <div class="addButton">
-          <button class="add" type="button">Add Book!</button>
+          <button class="addBook" type="button">Add Book!</button>
         </div>
         <div class="form-container">
           <form action="" method="get" class="book-form">
@@ -28,20 +28,23 @@
               <input id="Author-name" name="Author-name" type="text" />
             </div>
             <div class="Title">
-                <label for="Book-title">Title</label>
-                <input id="Book-title" name="Book-title" type="text"/> 
+              <label for="Book-title">Title</label>
+              <input id="Book-title" name="Book-title" type="text" />
             </div>
             <div class="Pages">
-                <label for="Num-Pages">Pages</label>
-                <input id="Num-Pages" name="Num-pages" type="text" />
+              <label for="Num-Pages">Pages</label>
+              <input id="Num-Pages" name="Num-pages" type="text" />
             </div>
             <fieldset class="ifRead">
-                <legend>Have you read it?</legend>
-                <div class="ifRead-class">
-                <label for="Read" class="">Yes 
+              <legend>Have you read it?</legend>
+              <div class="ifRead-class">
+                <label for="Read" class="yesNo">Yes</label>
                 <input type="checkbox" id="Read" name="haveRead" />
-                </div>  
-    
+
+                <label for="Read" class="yesNo">No</label>
+                <input type="checkbox" id="Read" name="haveNot" />
+              </div>
+            </fieldset>
           </form>
         </div>
       </div>

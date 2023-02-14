@@ -11,6 +11,9 @@ body {
 .left-side {
   grid-column: 1;
   grid-row: 1;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  background-color: #797676;
 }
 
 /*containers the books */
@@ -25,3 +28,45 @@ body {
   font-family: "kanit", sans-serif;
   font-size: 2vw;
 }
+/*adjusting checkbox width and height */
+div.ifRead-class,
+fieldset.ifRead {
+  width: 200px;
+  height: 70px;
+  margin: 0px;
+}
+/*user fill out form */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*.Author.Title.Pages {
+  display: inline-block;
+} */
+/*form text boxes size */
+input[type="text" i] {
+  width: 200px;
+  box-sizing: border-box;
+}
+input[input="text" ]
+/*center button on screen */
+.addButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2em;
+  font-family: "kanit", sans-serif;
+  font-weight: 700;
+}
+/*button appearance */
+.addBook {
+  border-radius: 2em;
+  font-family: "kanit", sans-serif;
+  font-weight: 300;
+  color: #695f5f;
+  font-size: larger;
+  width: 170px;
+  height: 65px;
+}
+/*get the words on top of text box */
