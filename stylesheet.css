@@ -23,33 +23,52 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: repeat(auto-fill, minmax(60px, 1fr));
 }
-/*setting for all the books*/
+/*settinga for all the books*/
 .book {
   font-family: "kanit", sans-serif;
   font-size: 2vw;
 }
-/*adjusting checkbox width and height */
-div.ifRead-class,
-fieldset.ifRead {
-  width: 200px;
-  height: 70px;
-  margin: 0px;
-}
+
 /*user fill out form */
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-/*.Author.Title.Pages {
-  display: inline-block;
-} */
+/*make form not display */
+.book-form {
+  display: none;
+}
+/*text box font */
+label {
+  font-family: "kanit", sans-serif;
+  font-size: large;
+}
+fieldset.ifRead {
+  font-family: "kanit", sans-serif;
+  font-size: large;
+}
 /*form text boxes size */
 input[type="text" i] {
-  width: 200px;
+  width: 230px;
+  height: 60px;
+  display: block;
   box-sizing: border-box;
+  border: solid black 1px;
 }
-input[input="text" ]
+/* submit button container */
+.submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+/*submit input button */
+input.submitButton {
+  font-family: "kanit", sans-serif;
+  font-size: medium;
+  color: black;
+}
+
 /*center button on screen */
 .addButton {
   display: flex;

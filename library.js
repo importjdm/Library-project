@@ -1,4 +1,5 @@
 const parent = document.querySelector(".bookContainer");
+let visible = document.querySelector;
 let i = 0;
 //library of books
 let library = [];
@@ -35,7 +36,16 @@ const bookTwo = new book("Emmanuel", "Dune", "600", "read");
 loopBooks();
 
 /*
-clean up the form
+
 figure out how to make it disapear
 figure how to make it appear when your press the button
+
+form class starts as display: block
+set it to to none
+then write code when button is clicked
+grab the forms class and change the class to 
+new class called "show" 
+in css the show class will have the same stuff as the book-form class
+except the display will be block to show form
+when form is submitted the class will be changed back to hide form
  */
