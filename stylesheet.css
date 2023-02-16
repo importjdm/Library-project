@@ -36,8 +36,12 @@ body {
   align-items: center;
 }
 /*make form not display */
-.book-form {
+.invisible.book-form {
   display: none;
+}
+/*makes form disply */
+.book-form {
+  display: block;
 }
 /*text box font */
 label {

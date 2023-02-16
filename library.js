@@ -1,5 +1,13 @@
+//the books are going to be added to parent
 const parent = document.querySelector(".bookContainer");
-let visible = document.querySelector;
+//Get button to be used w/ eventlistener
+const button = document.querySelector("button");
+//gets forms classes
+let toggleForm = document.querySelector(".invisible.book-form");
+
+//getting submit button
+let submitButton = document.querySelector("input[type='submit']");
+
 let i = 0;
 //library of books
 let library = [];
@@ -34,18 +42,25 @@ const bookOne = new book("james", "dont run", "356", "read");
 const bookTwo = new book("Emmanuel", "Dune", "600", "read");
 
 loopBooks();
+//toggles the invisible class on the form to remove & display it
+function displayForm() {
+  toggleForm.classList.toggle("invisible");
+}
 
+//toggles form on when addBook is pressed
+button.addEventListener("click", displayForm);
+//toggles form off when submit it pressed
+submitButton.addEventListener("click", displayForm);
+
+const remove = document.createElement("button");
 /*
+add button to each book!!!!
+after the div is created in the loopBooks function
+also create a new button element 
+make the button a child of div with class remove
 
-figure out how to make it disapear
-figure how to make it appear when your press the button
 
-form class starts as display: block
-set it to to none
-then write code when button is clicked
-grab the forms class and change the class to 
-new class called "show" 
-in css the show class will have the same stuff as the book-form class
-except the display will be block to show form
-when form is submitted the class will be changed back to hide form
+
+
+
  */
