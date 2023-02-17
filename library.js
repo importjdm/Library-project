@@ -24,13 +24,21 @@ function book(author, title, pages, read) {
 //loops through library array and displays it
 function loopBooks() {
   library.forEach((element) => {
-    i += 1;
-    let $div = document.createElement("div");
-    $div.classList.add("book", "book" + i);
+    let $div = document.createElement("div"); //div evrything is going to be on
+    let $buttonDiv = document.createElement("div"); //container for remove book
+    $buttonDiv.classList.add("rBook"); //class of container for remove book
+    i = library.indexOf(element); //index of current
+    $div.dataset.num = i; //add the data set attribute to div
+    let $dataAtt = document.createElement("button"); //makes button
+    $dataAtt.textContent = "Remove Book"; //button text
+    $dataAtt.classList.add("remove"); // class of button
+    $div.classList.add("book", "book" + i); //classes of div
     let string = Object.entries(element)
       .map((x) => x.join(": "))
       .join("\n");
     $div.append(string);
+    $buttonDiv.appendChild($dataAtt);
+    $div.appendChild($buttonDiv);
     parent.append($div);
   });
 }
@@ -49,16 +57,28 @@ function displayForm() {
 
 //toggles form on when addBook is pressed
 button.addEventListener("click", displayForm);
+
 //toggles form off when submit it pressed
 submitButton.addEventListener("click", displayForm);
 
-const remove = document.createElement("button");
 /*
 add button to each book!!!!
 after the div is created in the loopBooks function
 also create a new button element 
 make the button a child of div with class remove
+now the button is going to be on the display of everybook
+next create a eventlistener for the button when pressed remove the book
+problem: how do we know what book to remove when the book is pressed,
+solution: every book has a data-attribute when the button is pressed 
+it'll get the attribute which is going to be a number that number is 
+going to be the index number of the array its in.
+How do we add the data-attribute to it?
+You add it to the constructor?
 
+
+REMOVE THE VARIABLE i
+MAKE THE BOOK DIV OUTSIDE THE LOOP
+AND ASSIGN THE DATA ATTRIBUTE BASED ON THE ARRAYS INDEX
 
 
 

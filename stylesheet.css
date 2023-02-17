@@ -23,12 +23,19 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: repeat(auto-fill, minmax(60px, 1fr));
 }
+
 /*settinga for all the books*/
 .book {
   font-family: "kanit", sans-serif;
   font-size: 2vw;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }
-
+/*splits book buttons into two */
+.rBook {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 /*user fill out form */
 .form-container {
   display: flex;
