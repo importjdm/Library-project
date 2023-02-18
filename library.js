@@ -8,6 +8,11 @@ let toggleForm = document.querySelector(".invisible.book-form");
 //getting submit button
 let submitButton = document.querySelector("input[type='submit']");
 
+//initialize button to use outside of function
+let $removeButton = "";
+//initalizing index number
+let libIndex = "";
+
 let i = 0;
 //library of books
 let library = [];
@@ -28,16 +33,16 @@ function loopBooks() {
     let $buttonDiv = document.createElement("div"); //container for remove book
     $buttonDiv.classList.add("rBook"); //class of container for remove book
     i = library.indexOf(element); //index of current
-    $div.dataset.num = i; //add the data set attribute to div
-    let $dataAtt = document.createElement("button"); //makes button
-    $dataAtt.textContent = "Remove Book"; //button text
-    $dataAtt.classList.add("remove"); // class of button
+    $removeButton = document.createElement("button"); //makes button
+    $removeButton.dataset.num = i; //add the data set attribute to remove button
+    $removeButton.textContent = "Remove Book"; //button text
+    $removeButton.classList.add("remove"); // class of button
     $div.classList.add("book", "book" + i); //classes of div
     let string = Object.entries(element)
       .map((x) => x.join(": "))
       .join("\n");
     $div.append(string);
-    $buttonDiv.appendChild($dataAtt);
+    $buttonDiv.appendChild($removeButton);
     $div.appendChild($buttonDiv);
     parent.append($div);
   });
@@ -55,11 +60,31 @@ function displayForm() {
   toggleForm.classList.toggle("invisible");
 }
 
+//function that removes div from book conatiner
+function removeBook(num) {
+  library.splice(num, 1);
+  let beGone = document.querySelector(".book" + num);
+  beGone.remove();
+}
+
 //toggles form on when addBook is pressed
 button.addEventListener("click", displayForm);
 
 //toggles form off when submit it pressed
 submitButton.addEventListener("click", displayForm);
+
+//adding event listeners to remove button
+parent.addEventListener("click", (e) => {
+  console.log(e);
+  const isButton = e.target.nodeName === "BUTTON";
+  if (!isButton) {
+    return;
+  } else if (isButton) {
+    let dataPoint = e.target.dataset.num; //data attribure assigned to button
+    parseInt(dataPoint);
+    removeBook(dataPoint);
+  }
+});
 
 /*
 add button to each book!!!!
