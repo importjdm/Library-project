@@ -34,6 +34,8 @@ function loopBooks() {
     $buttonDiv.classList.add("rBook"); //class of container for remove book
     i = library.indexOf(element); //index of current
     $removeButton = document.createElement("button"); //makes button
+    let $readStatus = document.createElement("button");
+    $readStatus.textContent = "Read Status";
     $removeButton.dataset.num = i; //add the data set attribute to remove button
     $removeButton.textContent = "Remove Book"; //button text
     $removeButton.classList.add("remove"); // class of button
@@ -43,6 +45,7 @@ function loopBooks() {
       .join("\n");
     $div.append(string);
     $buttonDiv.appendChild($removeButton);
+    $buttonDiv.appendChild($readStatus);
     $div.appendChild($buttonDiv);
     parent.append($div);
   });
@@ -67,6 +70,17 @@ function removeBook(num) {
   beGone.remove();
 }
 
+//Changes reading status
+function toggleRead() {
+  if (this.Read === "Read") {
+    this.Read = "Have not";
+  } else {
+    this.Read = "Read";
+  }
+}
+
+toggleRead.prototype = Object.create(book.prototype);
+
 //toggles form on when addBook is pressed
 button.addEventListener("click", displayForm);
 
@@ -86,26 +100,16 @@ parent.addEventListener("click", (e) => {
   }
 });
 
+$readStatus.addEventListener("click");
 /*
-add button to each book!!!!
-after the div is created in the loopBooks function
-also create a new button element 
-make the button a child of div with class remove
-now the button is going to be on the display of everybook
-next create a eventlistener for the button when pressed remove the book
-problem: how do we know what book to remove when the book is pressed,
-solution: every book has a data-attribute when the button is pressed 
-it'll get the attribute which is going to be a number that number is 
-going to be the index number of the array its in.
-How do we add the data-attribute to it?
-You add it to the constructor?
+Add a button reading status button to each book!!!
+creating another button to add insdie the loopBooks
+make sure it fits currectly in the bookContainer 
+add an eventlistener to that button 
+when the button is clicked it we need to access Read property 
+make a function with the book prototype to inherit the read property
+when the button is clicked use ternary function to toggle between "Read" & "HaveNot"
 
-
-REMOVE THE VARIABLE i
-MAKE THE BOOK DIV OUTSIDE THE LOOP
-AND ASSIGN THE DATA ATTRIBUTE BASED ON THE ARRAYS INDEX
-
-
-
+LINKING READ STATUS BUTTON TO CORRECT BOOK READ PROPERTY 
 
  */
