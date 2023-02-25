@@ -7,12 +7,13 @@ let toggleForm = document.querySelector(".invisible.book-form");
 
 //getting submit button
 let submitButton = document.querySelector("input[type='submit']");
+//creates read status button
+let $readStatus;
 
 //initialize button to use outside of function
 let $removeButton = "";
-//initalizing index number
-let libIndex = "";
 
+//initalize variable
 let i = 0;
 //library of books
 let library = [];
@@ -27,15 +28,17 @@ function book(author, title, pages, read) {
 }
 
 //loops through library array and displays it
-function loopBooks() {
+function loopBooks(som) {
   library.forEach((element) => {
     let $div = document.createElement("div"); //div evrything is going to be on
     let $buttonDiv = document.createElement("div"); //container for remove book
     $buttonDiv.classList.add("rBook"); //class of container for remove book
     i = library.indexOf(element); //index of current
     $removeButton = document.createElement("button"); //makes button
-    let $readStatus = document.createElement("button");
+    $readStatus = document.createElement("button");
+    $readStatus.dataset.num = i;
     $readStatus.textContent = "Read Status";
+    $readStatus.classList.add("status");
     $removeButton.dataset.num = i; //add the data set attribute to remove button
     $removeButton.textContent = "Remove Book"; //button text
     $removeButton.classList.add("remove"); // class of button
@@ -54,8 +57,8 @@ function loopBooks() {
 //(lets Book have access to loopBooks function)
 loopBooks.prototype = Object.create(book.prototype);
 
-const bookOne = new book("james", "dont run", "356", "read");
-const bookTwo = new book("Emmanuel", "Dune", "600", "read");
+const bookOne = new book("james", "dont run", "356", "Read");
+const bookTwo = new book("Emmanuel", "Dune", "600", "Read");
 
 loopBooks();
 //toggles the invisible class on the form to remove & display it
@@ -71,14 +74,23 @@ function removeBook(num) {
 }
 
 //Changes reading status
-function toggleRead() {
-  if (this.Read === "Read") {
-    this.Read = "Have not";
+function toggleRead(index, dataPoint) {
+  let readOrNot = index.Read;
+  if (readOrNot === "Read") {
+    index.Read = "Have not";
   } else {
-    this.Read = "Read";
+    index.Read = "Read";
   }
+  let bookToString = Object.entries(index)
+    .map((x) => x.join(": "))
+    .join("\n");
+  const replaceBook = (document.querySelector(
+    //changes book div text to new s
+    ".book" + dataPoint
+  ).firstChild.data = bookToString);
 }
 
+//give access to the book properties
 toggleRead.prototype = Object.create(book.prototype);
 
 //toggles form on when addBook is pressed
@@ -87,29 +99,31 @@ button.addEventListener("click", displayForm);
 //toggles form off when submit it pressed
 submitButton.addEventListener("click", displayForm);
 
-//adding event listeners to remove button
+//listens for when remove is pressed
 parent.addEventListener("click", (e) => {
-  console.log(e);
-  const isButton = e.target.nodeName === "BUTTON";
-  if (!isButton) {
-    return;
-  } else if (isButton) {
-    let dataPoint = e.target.dataset.num; //data attribure assigned to button
+  const isButton = e.target.className;
+  let dataPoint = e.target.dataset.num;
+  if (isButton === "remove") {
     parseInt(dataPoint);
     removeBook(dataPoint);
   }
+  return;
 });
 
-$readStatus.addEventListener("click");
-/*
-Add a button reading status button to each book!!!
-creating another button to add insdie the loopBooks
-make sure it fits currectly in the bookContainer 
-add an eventlistener to that button 
-when the button is clicked it we need to access Read property 
-make a function with the book prototype to inherit the read property
-when the button is clicked use ternary function to toggle between "Read" & "HaveNot"
+//listens to when button with status class is pressed
+parent.addEventListener("click", (e) => {
+  let isButton = e.target.className;
+  console.log(isButton);
+  let dataPoint = e.target.dataset.num;
+  console.log(dataPoint);
+  if (isButton === "status") {
+    let ifRead = library[dataPoint];
+    console.log(ifRead);
+    toggleRead(ifRead, dataPoint);
+  }
+});
 
-LINKING READ STATUS BUTTON TO CORRECT BOOK READ PROPERTY 
-
- */
+/*toggles read but not when i remove a book
+first. because index changes when i remove a book 
+so i have tp update the books dataset.num value eveytime
+a book is removed */

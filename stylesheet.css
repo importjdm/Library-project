@@ -27,7 +27,7 @@ body {
 /*settinga for all the books*/
 .book {
   font-family: "kanit", sans-serif;
-  font-size: 2vw;
+  font-size: 1.5vw;
   display: grid;
   grid-template-rows: 1fr 1fr;
 }
