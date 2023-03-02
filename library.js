@@ -59,6 +59,7 @@ loopBooks.prototype = Object.create(book.prototype);
 
 const bookOne = new book("james", "dont run", "356", "Read");
 const bookTwo = new book("Emmanuel", "Dune", "600", "Read");
+const bookThree = new book("Lela", "Keep Going", "666", "Have not");
 
 loopBooks();
 //toggles the invisible class on the form to remove & display it
@@ -67,12 +68,41 @@ function displayForm() {
 }
 
 //function that removes div from book conatiner
-function removeBook(num) {
+function removeBook(num, isButton) {
   library.splice(num, 1);
   let beGone = document.querySelector(".book" + num);
   beGone.remove();
+  updateDataSet();
 }
+//updates all library objects with new index (when things are removed from array)
+function updateDataSet() {
+  let i = 0; //
+  let x = 0;
+  while (i < library.length) {
+    let getButton = document.querySelector(`button.remove[data-num="${i}"]`);
+    if (getButton === null) {
+      getButton = document.querySelector(`button.remove[data-num="${++x}"]`);
+      console.log(getButton);
+      getButton.dataset.num = i;
+    } else {
+      getButton.dataset.num = i;
+    }
+    i++;
+  }
+}
+/*it works sorta*/
 
+//get read status button of the object to change dataset value to new index
+
+//let newNum = element.dataset.num;
+//let newDataSet = document.querySelector(`[data-num="${newNum}"`);
+
+/* for each object were going to get the index of that object
+    then how do we relate the index to that object
+    we receive in that info from the remove function
+    now we need to update its book + i 
+
+     */
 //Changes reading status
 function toggleRead(index, dataPoint) {
   let readOrNot = index.Read;
@@ -102,23 +132,21 @@ submitButton.addEventListener("click", displayForm);
 //listens for when remove is pressed
 parent.addEventListener("click", (e) => {
   const isButton = e.target.className;
+  console.log(isButton);
   let dataPoint = e.target.dataset.num;
   if (isButton === "remove") {
     parseInt(dataPoint);
-    removeBook(dataPoint);
+    removeBook(dataPoint, isButton);
   }
   return;
 });
 
-//listens to when button with status class is pressed
+//listens to when button with Read status class is pressed
 parent.addEventListener("click", (e) => {
   let isButton = e.target.className;
-  console.log(isButton);
   let dataPoint = e.target.dataset.num;
-  console.log(dataPoint);
   if (isButton === "status") {
     let ifRead = library[dataPoint];
-    console.log(ifRead);
     toggleRead(ifRead, dataPoint);
   }
 });
