@@ -72,37 +72,35 @@ function removeBook(num, isButton) {
   library.splice(num, 1);
   let beGone = document.querySelector(".book" + num);
   beGone.remove();
-  updateDataSet();
+  updateDataSet(num);
 }
-//updates all library objects with new index (when things are removed from array)
+//updates all data-num values & class book# with current index position
 function updateDataSet() {
-  let i = 0; //
+  let i = 0;
   let x = 0;
   while (i < library.length) {
-    let getButton = document.querySelector(`button.remove[data-num="${i}"]`);
-    if (getButton === null) {
-      getButton = document.querySelector(`button.remove[data-num="${++x}"]`);
-      console.log(getButton);
-      getButton.dataset.num = i;
+    let getButton = document.querySelectorAll(`button[data-num="${i}"]`);
+    if (getButton.length === 0) {
+      getButton = document.querySelectorAll(`button[data-num="${++x}"]`);
+      getButton.forEach((element) => {
+        element.dataset.num = i;
+        let newClass = element.parentNode.parentNode;
+        newClass.setAttribute("class", "");
+        newClass.classList.add("book", "book" + i);
+      });
     } else {
-      getButton.dataset.num = i;
+      getButton.forEach((element) => {
+        element.dataset.num = i;
+        let newClass = element.parentNode.parentNode;
+        newClass.setAttribute("class", "");
+        newClass.classList.add("book", "book" + i);
+      });
+      ++x;
     }
     i++;
   }
 }
-/*it works sorta*/
 
-//get read status button of the object to change dataset value to new index
-
-//let newNum = element.dataset.num;
-//let newDataSet = document.querySelector(`[data-num="${newNum}"`);
-
-/* for each object were going to get the index of that object
-    then how do we relate the index to that object
-    we receive in that info from the remove function
-    now we need to update its book + i 
-
-     */
 //Changes reading status
 function toggleRead(index, dataPoint) {
   let readOrNot = index.Read;
@@ -132,7 +130,6 @@ submitButton.addEventListener("click", displayForm);
 //listens for when remove is pressed
 parent.addEventListener("click", (e) => {
   const isButton = e.target.className;
-  console.log(isButton);
   let dataPoint = e.target.dataset.num;
   if (isButton === "remove") {
     parseInt(dataPoint);
@@ -150,8 +147,3 @@ parent.addEventListener("click", (e) => {
     toggleRead(ifRead, dataPoint);
   }
 });
-
-/*toggles read but not when i remove a book
-first. because index changes when i remove a book 
-so i have tp update the books dataset.num value eveytime
-a book is removed */
